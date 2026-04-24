@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>FayLink</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">FayLink v1</p>
+        <h1>Direct encrypted chat + voice</h1>
+        <p class="muted">Discovery/signaling only. Messages and voice go directly over WebRTC when a peer path is possible.</p>
+      </div>
+      <div id="statusPill" class="pill">Starting…</div>
+    </section>
+
+    <section class="card">
+      <h2>Your device identity</h2>
+      <p class="tiny">Share/compare this code to make sure nobody is pretending to be your contact.</p>
+      <div class="codeBox" id="myCode">Generating…</div>
+      <p class="tiny">Connection safety code, after connect:</p>
+      <div class="codeBox" id="safetyCode">Not connected</div>
+    </section>
+
+    <section class="card">
+      <h2>Connection</h2>
+      <label>Room ID</label>
+      <input id="roomInput" autocomplete="off" placeholder="example: fahim-villa-123" />
+
+      <label>ICE/STUN servers</label>
+      <input id="iceInput" autocomplete="off" value="stun:stun.l.google.com:19302" />
+      <p class="tiny">For same Wi‑Fi/LAN only, clear this field. For Bangladesh-only networks, use a local STUN server if available.</p>
+
+      <label class="check"><input type="checkbox" id="voiceCheck" /> Enable voice before connecting</label>
+
+      <div class="grid2">
+        <button id="hostManualBtn">Host manual</button>
+        <button id="guestManualBtn">Join manual</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <label>Optional signaling relay URL</label>
+      <input id="relayInput" autocomplete="off" placeholder="wss://your-relay.example.com" />
+      <div class="grid2">
+        <button id="hostRelayBtn">Host using relay</button>
+        <button id="guestRelayBtn">Join using relay</button>
+      </div>
+      <button id="disconnectBtn" class="secondary">Disconnect</button>
+    </section>
+
+    <section class="card">
+      <h2>Manual signal exchange</h2>
+      <p class="tiny">Manual mode needs no server. Host creates an offer. Guest pastes it, creates an answer. Host pastes the answer.</p>
+      <label>Send this signal to the other phone</label>
+      <textarea id="signalOut" readonly placeholder="Your offer/answer will appear here"></textarea>
+      <button id="copySignalBtn" class="secondary">Copy signal</button>
+      <label>Paste signal from the other phone</label>
+      <textarea id="signalIn" placeholder="Paste offer or answer here"></textarea>
+      <button id="applySignalBtn">Apply pasted signal</button>
+    </section>
+
+    <section class="card chatCard">
+      <h2>Chat</h2>
+      <div id="chatLog" class="chatLog"></div>
+      <div class="chatInputRow">
+        <input id="chatInput" autocomplete="off" placeholder="Type encrypted message…" />
+        <button id="sendBtn">Send</button>
+      </div>
+      <audio id="remoteAudio" autoplay playsinline></audio>
+    </section>
+
+    <section class="card">
+      <h2>Logs</h2>
+      <pre id="logBox"></pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
